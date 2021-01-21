@@ -1,0 +1,11 @@
+on: [push]
+
+jobs:
+  setup-sfdx-action:
+    runs-on: ubuntu-latest
+    name: Setup SFDX
+    steps:
+    - name: Setup SFDX
+      uses: m50/setup-sfdx-action
+      with:
+        plugins: skuid-sfdx
