@@ -18,6 +18,7 @@ Required with `jwt-key`.
 The JWT private key for JWT authentication. Can be used in place of sfdxurl authentication.
 
 Required with `client-id`.
+
 ### `sfdxurl`
 
 The sfdx URL for authentication. Can be used in place of JWT authentication.
@@ -28,7 +29,7 @@ Must by in one of the following formats:
 
 You can display the constructed sfdxurl using the verbose mode of org display:
 ```
-sfdx force:org:display -a YourExistingOrgAliasName --verbose
+sfdx force:org:display -u YourExistingOrgAliasName --verbose | grep "Sfdx Auth Url" | awk '{print $4}'
 ```
 
 ### `org-alias`
@@ -71,6 +72,3 @@ with:
   jwt-key: ${{ env.SF_JWT_KEY }}
 ```
 
-## Future Scope
-
-- Add automatic authentication [WIP]
