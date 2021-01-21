@@ -5,7 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Setup SFDX
     steps:
-    - name: Setup SFDX
-      uses: m50/setup-sfdx-action
-      with:
-        plugins: skuid-sfdx
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup SFDX
+        uses: ./
+        with:
+          plugins: skuid-sfdx
