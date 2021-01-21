@@ -5,11 +5,11 @@ const exec = util.promisify(require('child_process').exec);
 const writeFile = util.promisify(require('fs').writeFile);
 
 const authentication = {
-  clientId: core.getInput('client-id'),
-  jwtKey: core.getInput('jwt-key'),
-  sfdxurl: core.getInput('sfdxurl'),
-  orgAlias: core.getInput('org-alias'),
-  sandbox: core.getInput('sandbox'),
+  clientId: core.getInput('client-id') ?? '',
+  jwtKey: core.getInput('jwt-key') ?? '',
+  sfdxurl: core.getInput('sfdxurl') ?? '',
+  orgAlias: core.getInput('org-alias') ?? '',
+  sandbox: core.getInput('sandbox') ?? '',
 };
 
 const jwtAuth = async () => {
