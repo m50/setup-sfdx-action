@@ -1,5 +1,8 @@
 name: 'Setup SFDX'
 description: 'Install SFDX and plugins'
+branding:
+  icon: arrow-down-circle
+  color: blue
 inputs:
   plugins:  # id of input
     description: A comma separated list of plugins to install
