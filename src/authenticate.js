@@ -4,16 +4,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const writeFile = util.promisify(require('fs').writeFile);
 
-const authentication = {
-  clientId: core.getInput('client-id') || '',
-  jwtKey: core.getInput('jwt-key') || '',
-  sfdxurl: core.getInput('sfdxurl') || '',
-  orgAlias: core.getInput('org-alias') || '',
-  sandbox: core.getInput('sandbox') || '',
-};
-
-const jwtAuth = async () => {
-  const { clientId, jwtKey, orgAlias, sandbox } = authentication;
+const jwtAuth = async ({ clientId, jwtKey, orgAlias, sandbox }) => {
   await writeFile('./jwt.key', jwtKey);
   const url = sandbox === 'true' ? '-r https://test.salesforce.com' : '';
   const { stdout, stderr } = await exec(`sfdx force:auth:jwt:grant -i ${clientId} -f ./jwt.key -a ${orgAlias} ${url}`);
@@ -21,8 +12,7 @@ const jwtAuth = async () => {
   console.log(stderr);
 }
 
-const sfdxurlAuth = async () => {
-  const { sfdxurl, orgAlias } = authentication;
+const sfdxurlAuth = async ({ sfdxurl, orgAlias }) => {
   await writeFile('./sfdxurl.txt', sfdxurl);
   const { stdout, stderr } = await exec(`sfdx force:auth:sfdxurl:store -f ./sfdxurl.txt -a ${orgAlias}`);
   console.log(stdout);
@@ -30,10 +20,17 @@ const sfdxurlAuth = async () => {
 }
 
 module.exports = async () => {
+  const authentication = {
+    clientId: core.getInput('client-id') || '',
+    jwtKey: core.getInput('jwt-key') || '',
+    sfdxurl: core.getInput('sfdxurl') || '',
+    orgAlias: core.getInput('org-alias') || '',
+    sandbox: core.getInput('sandbox') || '',
+  };
   if (clientId && jwtKey) {
-    await jwtAuth();
+    await jwtAuth(authentication);
   } else if (sfdxurl) {
-    await sfdxurlAuth();
+    await sfdxurlAuth(authentication);
   } else if (clientId || jwtKey) {
     core.setFailed("Invalid JWT authentication provided. Must provide both client-id and jwt-key.");
   } else {
