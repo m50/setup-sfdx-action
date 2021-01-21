@@ -29,7 +29,7 @@ const onInstall = async (error, stdout, stderr) => {
 };
 
 try {
-  const installCommand = `wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz \
+  const installCommand = `wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz \
     && mkdir sfdx \
     && tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1 \
     && ./sfdx/install`;
