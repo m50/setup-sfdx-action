@@ -20,18 +20,18 @@ const sfdxurlAuth = async ({ sfdxurl, orgAlias }) => {
 }
 
 module.exports = async () => {
-  const authentication = {
+  const authOptions = {
     clientId: core.getInput('client-id') || '',
     jwtKey: core.getInput('jwt-key') || '',
     sfdxurl: core.getInput('sfdxurl') || '',
     orgAlias: core.getInput('org-alias') || '',
     sandbox: core.getInput('sandbox') || '',
   };
-  if (clientId && jwtKey) {
-    await jwtAuth(authentication);
-  } else if (sfdxurl) {
-    await sfdxurlAuth(authentication);
-  } else if (clientId || jwtKey) {
+  if (authOptions.clientId && authOptions.jwtKey) {
+    await jwtAuth(authOptions);
+  } else if (authOptions.sfdxurl) {
+    await sfdxurlAuth(authOptions);
+  } else if (authOptions.clientId || authOptions.jwtKey) {
     core.setFailed("Invalid JWT authentication provided. Must provide both client-id and jwt-key.");
   } else {
     console.log('No authentication provided, skipping authentication...');
