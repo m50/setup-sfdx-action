@@ -3,11 +3,7 @@ const github = require('@actions/github');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-const onInstall = async (error, stdout, stderr) => {
-  if (error) {
-    core.setFailed(error.message);
-    return;
-  }
+const onInstall = async ({ stdout, stderr }) => {
   if (stderr) {
     console.log(stderr);
   }
@@ -17,7 +13,7 @@ const onInstall = async (error, stdout, stderr) => {
 
   const pluginList = core.getInput('plugins');
   const plugins = pluginList.split(',');
-  plugins.forEach((plugin) => {
+  for (plugin in plugins) {
     try {
       const { stdout, stderr } = await exec(`echo 'y' | sfdx plugins:install ${plugin}`);
       console.log(stderr);
@@ -25,7 +21,7 @@ const onInstall = async (error, stdout, stderr) => {
     } catch (e) {
       core.setFailed(e.message);
     }
-  });
+  }
 };
 
 try {
@@ -33,7 +29,9 @@ try {
     && mkdir sfdx \
     && tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1 \
     && ./sfdx/install`;
-  exec(installCommand, onInstall);
+  exec(installCommand)
+    .then(onInstall)
+    .catch(error => core.setFailed(error.message));
 } catch (error) {
   core.setFailed(error.message);
 }

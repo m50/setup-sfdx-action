@@ -7,6 +7,23 @@ inputs:
   plugins:  # id of input
     description: A comma separated list of plugins to install
     required: false
+  client-id:
+    description: The JWT client ID for JWT authentication. Can be used in place of sfdxurl authentication. Required with `jwt-key`.
+    required: false
+  jwt-key:
+    description: The JWT private key for JWT authentication. Can be used in place of sfdxurl authentication. Required with `client-id`.
+    required: false
+  sfdxurl:
+    description: The sfdx URL for authentication. Can be used in place of JWT authentication.
+    required: false
+  org-alias:
+    description: The alias to use for the organization logged in as.
+    required: false
+    default: test
+  sandbox:
+    description: Whether authentication is happening in a sandbox. Default is 'true'.
+    required: false
+    default: 'true'
 runs:
   using: 'node12'
   main: 'dist/index.js'
