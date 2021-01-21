@@ -1,0 +1,9 @@
+name: 'Setup SFDX'
+description: 'Install SFDX and plugins'
+inputs:
+  plugins:  # id of input
+    description: A comma separated list of plugins to install
+    required: false
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

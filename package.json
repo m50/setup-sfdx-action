@@ -1,0 +1,28 @@
+{
+  "name": "setup-sfdx-action",
+  "version": "1.0.0",
+  "description": "A simple github action to setup sfdx with any plugins for use in actions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build index.js --license licenses.txt -o dist/ -m"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m50/setup-sfdx-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m50/setup-sfdx-action/issues"
+  },
+  "homepage": "https://github.com/m50/setup-sfdx-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.27.0"
+  }
+}
