@@ -44,10 +44,31 @@ Whether authentication is happening in a sandbox. Only used with JWT authenticat
 
 ## Example usage
 
+### No authentication
+
 ```yaml
 uses: m50/setup-sfdx-action@v0.1
 with:
   plugins: skuid-sfdx
+```
+
+### SFDXURL authentication
+
+```yaml
+uses: m50/setup-sfdx-action@v0.1
+with:
+  plugins: skuid-sfdx
+  sfdxurl: ${{ env.SFDXURL }}
+```
+
+### JWT Authentication
+
+```yaml
+uses: m50/setup-sfdx-action@v0.1
+with:
+  plugins: skuid-sfdx
+  cliend-id: ${{ env.SF_CLIENT_ID }}
+  jwt-key: ${{ env.SF_JWT_KEY }}
 ```
 
 ## Future Scope
