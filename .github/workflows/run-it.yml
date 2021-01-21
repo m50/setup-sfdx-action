@@ -12,3 +12,5 @@ jobs:
         uses: ./
         with:
           plugins: skuid-sfdx
+      - name: Validate SFDX
+        run: sfdx --version
