@@ -59,7 +59,7 @@ with:
 uses: m50/setup-sfdx-action@v0.1
 with:
   plugins: skuid-sfdx
-  sfdxurl: ${{ env.SFDXURL }}
+  sfdxurl: ${{ secrets.SFDXURL }}
 ```
 
 ### JWT Authentication
@@ -68,7 +68,7 @@ with:
 uses: m50/setup-sfdx-action@v0.1
 with:
   plugins: skuid-sfdx
-  cliend-id: ${{ env.SF_CLIENT_ID }}
-  jwt-key: ${{ env.SF_JWT_KEY }}
+  cliend-id: ${{ secrets.SF_CLIENT_ID }}
+  jwt-key: ${{ secrets.SF_JWT_KEY }}
 ```
 
