@@ -24,8 +24,10 @@ const sfdxurlAuth = async ({ sfdxurl, orgAlias }) => {
 }
 
 const writeSfdxConfig = async (defaultusername) => {
-  const config = {defaultusername};
-  await mkdir('./.sfdx');
+  const config = { defaultusername };
+  if (!fs.existsSync('./.sfdx')) {
+    await mkdir('./.sfdx');
+  }
   await writeFile('./.sfdx/sfdx-config.json', JSON.stringify(config));
 }
 
