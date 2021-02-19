@@ -4,7 +4,7 @@ name: Run the action
 jobs:
   setup-sfdx-action:
     runs-on: ubuntu-latest
-    name: Setup SFDX
+    name: Setup SFDX (w/ plugins)
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
 
   setup-sfdx-action-no-plugins:
     runs-on: ubuntu-latest
-    name: Setup SFDX
+    name: Setup SFDX (no plugins)
     steps:
       - name: Checkout
         uses: actions/checkout@v2
