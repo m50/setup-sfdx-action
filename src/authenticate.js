@@ -1,8 +1,10 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const fs = require('fs');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const writeFile = util.promisify(require('fs').writeFile);
+const writeFile = util.promisify(fs.writeFile);
+const mkdir = util.promisify(fs.mkdir);
 
 const jwtAuth = async ({ clientId, jwtKey, orgAlias, sandbox }) => {
   await writeFile('./jwt.key', jwtKey);
@@ -10,6 +12,7 @@ const jwtAuth = async ({ clientId, jwtKey, orgAlias, sandbox }) => {
   const { stdout, stderr } = await exec(`sfdx force:auth:jwt:grant -i ${clientId} -f ./jwt.key -a ${orgAlias} ${url}`);
   console.log(stdout);
   console.log(stderr);
+  await writeSfdxConfig(orgAlias);
 }
 
 const sfdxurlAuth = async ({ sfdxurl, orgAlias }) => {
@@ -17,6 +20,13 @@ const sfdxurlAuth = async ({ sfdxurl, orgAlias }) => {
   const { stdout, stderr } = await exec(`sfdx force:auth:sfdxurl:store -f ./sfdxurl.txt -a ${orgAlias}`);
   console.log(stdout);
   console.log(stderr);
+  await writeSfdxConfig(orgAlias);
+}
+
+const writeSfdxConfig = async (defaultusername) => {
+  const config = {defaultusername};
+  await mkdir('./.sfdx');
+  await writeFile('./.sfdx/sfdx-config.json', JSON.stringify(config));
 }
 
 module.exports = async () => {
