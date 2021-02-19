@@ -15,6 +15,9 @@ const onInstall = async ({ stdout, stderr }) => {
   const pluginList = core.getInput('plugins');
   const plugins = pluginList.split(',');
   for (const plugin of plugins) {
+    if (plugin.length < 1) {
+      continue;
+    }
     try {
       const { stdout, stderr } = await exec(`echo 'y' | sfdx plugins:install ${plugin}`);
       console.log(stderr);

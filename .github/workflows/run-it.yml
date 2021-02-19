@@ -16,3 +16,15 @@ jobs:
         run: |
           sfdx --version
           sfdx plugins
+
+  setup-sfdx-action-no-plugins:
+    runs-on: ubuntu-latest
+    name: Setup SFDX
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup SFDX
+        uses: ./
+      - name: Validate SFDX
+        run: |
+          sfdx --version
