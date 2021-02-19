@@ -15,7 +15,7 @@ const onInstall = async ({ stdout, stderr }) => {
   const pluginList = core.getInput('plugins');
   const plugins = pluginList.split(',');
   for (const plugin of plugins) {
-    if (plugin.length < 1) {
+    if (plugin.trim().length < 1) {
       continue;
     }
     try {
