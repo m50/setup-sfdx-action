@@ -13,6 +13,9 @@ inputs:
   jwt-key:
     description: The JWT private key for JWT authentication. Can be used in place of sfdxurl authentication. Required with `client-id`.
     required: false
+  username:
+    description: The Username to use with the JWT key.
+    required: false
   sfdxurl:
     description: The sfdx URL for authentication. Can be used in place of JWT authentication.
     required: false
