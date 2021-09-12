@@ -12,12 +12,18 @@ This optional input takes a CSV list of plugins to install into SFDX.
 
 The JWT client ID for JWT authentication. Can be used in place of sfdxurl authentication.
 
-Required with `jwt-key`.
+Required with `jwt-key` and `username`.
 ### `jwt-key`
 
 The JWT private key for JWT authentication. Can be used in place of sfdxurl authentication.
 
-Required with `client-id`.
+Required with `client-id` and `username`.
+
+### `username`
+
+The Username for JWT authentication. Can be used in place of sfdxurl authentication.
+
+Required with `jwt-key` and `cliend-id`.
 
 ### `sfdxurl`
 
@@ -70,5 +76,6 @@ with:
   plugins: skuid-sfdx
   cliend-id: ${{ secrets.SF_CLIENT_ID }}
   jwt-key: ${{ secrets.SF_JWT_KEY }}
+  username: ${{ secrets.SF_USERNAME }}
 ```
 
